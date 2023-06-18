@@ -21,10 +21,10 @@ import java.time.LocalDate;
 public class UserImageController {
 
     @Autowired
-    UserIdAndPeriodService userIdAndPeriodService;
+    private UserIdAndPeriodService userIdAndPeriodService;
 
     @Autowired
-    UserImageIdService userImageIdService;
+    private UserImageIdService userImageIdService;
 
     @GetMapping(path = "/list")
     public ResponseEntity<?> getListImagesIdByUserId

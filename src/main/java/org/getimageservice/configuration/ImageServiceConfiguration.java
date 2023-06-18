@@ -1,13 +1,16 @@
 package org.getimageservice.configuration;
 
+import org.getimageservice.client.ImageRestTemplate;
+import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.client.RestTemplate;
 
 @Configuration
 public class ImageServiceConfiguration {
     @Bean
-    public RestTemplate restTemplate() {
-        return new RestTemplate();
+    public ImageRestTemplate imageRestTemplate() {
+        return new ImageRestTemplate(new RestTemplateBuilder());
     }
+
+
 }
