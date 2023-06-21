@@ -1,10 +1,10 @@
 package org.getimageservice.service;
 
+import org.getimageservice.model.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
-import java.io.IOException;
 
 @Service
 public class UserImageIdServiceImpl implements UserImageIdService {
@@ -13,7 +13,7 @@ public class UserImageIdServiceImpl implements UserImageIdService {
     private ApplicationContext context;
 
     @Override
-    public byte[] getImageByUuid(String imageUuid) throws IOException {
+    public ResponseEntity<ApiResponse> getImageByUuid(String imageUuid) {
         ImageReceiveService imageReceiveService = context.getBean(ImageReceiveService.class);
         return imageReceiveService.getImageByUuid(imageUuid);
     }

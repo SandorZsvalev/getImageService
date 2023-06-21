@@ -1,13 +1,12 @@
 package org.getimageservice.service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
+import org.getimageservice.model.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.List;
-import java.util.UUID;
 
 @Service
 public class UserIdAndPeriodServiceImpl implements UserIdAndPeriodService {
@@ -16,7 +15,7 @@ public class UserIdAndPeriodServiceImpl implements UserIdAndPeriodService {
     private ApplicationContext context;
 
     @Override
-    public List<UUID> getListOfImageByUserIdAndPeriod(Long userId, LocalDate from, LocalDate to) throws JsonProcessingException {
+    public ResponseEntity<ApiResponse> getListOfImageByUserIdAndPeriod(Long userId, LocalDate from, LocalDate to) {
         ImageInfoReceiveService imageInfoReceiveService = context.getBean(ImageInfoReceiveService.class);
         return imageInfoReceiveService.getListOfImageByUserIdAndPeriod(userId,from,to);
     }

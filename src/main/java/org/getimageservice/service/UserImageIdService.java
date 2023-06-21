@@ -1,8 +1,9 @@
 package org.getimageservice.service;
 
-import java.io.IOException;
+import org.getimageservice.model.ApiResponse;
+import org.springframework.http.ResponseEntity;
 
 public interface UserImageIdService {
 
-    byte[] getImageByUuid(String imageUuid) throws IOException;
+    ResponseEntity<ApiResponse> getImageByUuid(String imageUuid);
 }

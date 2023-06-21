@@ -1,14 +1,13 @@
 package org.getimageservice.service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
+import org.getimageservice.model.ApiResponse;
+import org.springframework.http.ResponseEntity;
 
 import java.time.LocalDate;
-import java.util.List;
-import java.util.UUID;
 
 public interface ImageInfoReceiveService {
 
-    List<UUID> getListOfImageByUserIdAndPeriod(Long userId, LocalDate from, LocalDate to) throws JsonProcessingException;
+    ResponseEntity<ApiResponse> getListOfImageByUserIdAndPeriod(Long userId, LocalDate from, LocalDate to);
 
 }
 

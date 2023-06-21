@@ -1,11 +1,11 @@
 package org.getimageservice.service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
+import org.getimageservice.model.ApiResponse;
 import org.getimageservice.model.ImageDto;
 
 public interface ImageDtoService {
 
-    ImageDto deserializeImage(String responseBody) throws JsonProcessingException;
+    ImageDto getImageDto(ApiResponse apiResponse);
 
     byte[] getImageFromImageDto(ImageDto imageDto);
 }

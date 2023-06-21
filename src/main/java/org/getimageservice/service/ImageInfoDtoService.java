@@ -1,13 +1,13 @@
 package org.getimageservice.service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
+import org.getimageservice.model.ApiResponse;
 import org.getimageservice.model.ImageInfoDto;
+
 import java.util.List;
-import java.util.UUID;
 
 public interface ImageInfoDtoService {
 
-    List<ImageInfoDto> deserializeImageInfo(String responseBody) throws JsonProcessingException;
+    List<ImageInfoDto> getImageInfoList(ApiResponse apiResponse);
 
-    List<UUID> getUUIDfromListOfImageInfoDto(List<ImageInfoDto> listOfImageDto);
+    List<String> getUUIDfromListOfImageInfoDto(List<ImageInfoDto> listOfImageDto);
 }
