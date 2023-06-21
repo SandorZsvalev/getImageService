@@ -12,8 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 
-import java.time.LocalDate;
-
 @Service
 @Scope("prototype")
 public class ImageInfoReceiveServiceImpl implements ImageInfoReceiveService {
@@ -31,7 +29,7 @@ public class ImageInfoReceiveServiceImpl implements ImageInfoReceiveService {
     private ApiResponseService apiResponseService;
 
     @Override
-    public ResponseEntity<ApiResponse> getListOfImageByUserIdAndPeriod(Long userId, LocalDate from, LocalDate to) {
+    public ResponseEntity<ApiResponse> getListOfImageByUserIdAndPeriod(Long userId, String from, String to) {
 
         try {
             ResponseEntity<ApiResponse> response = imageRestTemplate.exchange(
@@ -41,8 +39,8 @@ public class ImageInfoReceiveServiceImpl implements ImageInfoReceiveService {
                     new ParameterizedTypeReference<>() {
                     },
                     userId,
-                    from.toString(),
-                    to.toString()
+                    from,
+                    to
             );
             return response;
         } catch (HttpClientErrorException exception) {

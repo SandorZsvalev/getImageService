@@ -7,7 +7,7 @@ import java.time.LocalDate;
 
 public interface ImageInfoReceiveService {
 
-    ResponseEntity<ApiResponse> getListOfImageByUserIdAndPeriod(Long userId, LocalDate from, LocalDate to);
+    ResponseEntity<ApiResponse> getListOfImageByUserIdAndPeriod(Long userId, String from, String to);
 
 }
 
