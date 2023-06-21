@@ -28,7 +28,7 @@ public class ImageInfoReceiveServiceImpl implements ImageInfoReceiveService {
     public ResponseEntity<ApiResponse> getListOfImageByUserIdAndPeriod(Long userId, String from, String to) {
 
         try {
-            ResponseEntity<ApiResponse> response = imageRestTemplate.exchange(
+            return imageRestTemplate.exchange(
                     pathToImageList,
                     HttpMethod.GET,
                     null,
@@ -38,7 +38,6 @@ public class ImageInfoReceiveServiceImpl implements ImageInfoReceiveService {
                     from,
                     to
             );
-            return response;
         } catch (HttpClientErrorException exception) {
             ApiResponse apiResponse = apiResponseService.fromException(exception);
             return new ResponseEntity<>(apiResponse, exception.getStatusCode());

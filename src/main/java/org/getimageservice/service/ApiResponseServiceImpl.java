@@ -11,18 +11,13 @@ import java.util.Map;
 
 @Service
 public class ApiResponseServiceImpl implements ApiResponseService {
-    @Override
-    public ApiResponse deserializeApiResponse(String responseBody) throws JsonProcessingException {
-        ObjectMapper objectMapper = new ObjectMapper();
-        return objectMapper.readValue(responseBody, new TypeReference<>() {
-        });
-    }
 
     public ApiResponse fromException (HttpClientErrorException exception){
         ApiResponse apiResponse = new ApiResponse();
         String exceptionMessage = exception.getMessage();
 
         // Удаляем префикс и суффикс из строки message
+        assert exceptionMessage != null;
         String jsonStr = exceptionMessage.substring(exceptionMessage.indexOf("{"), exceptionMessage.lastIndexOf("}") + 1);
 
         // Удаляем кавычки вокруг JSON-строки
@@ -30,7 +25,7 @@ public class ApiResponseServiceImpl implements ApiResponseService {
 
         ObjectMapper objectMapper = new ObjectMapper();
 
-        Map<String, Object> jsonMap = null;
+        Map<String, Object> jsonMap;
         try {
             jsonMap = objectMapper.readValue(jsonStr, new TypeReference<>() {
             });
