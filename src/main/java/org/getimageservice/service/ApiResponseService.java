@@ -5,6 +5,6 @@ import org.getimageservice.model.ApiResponse;
 
 
 public interface ApiResponseService {
-    public ApiResponse deserializeApiResponse(String responseBody) throws JsonProcessingException;
+    ApiResponse deserializeApiResponse(String responseBody) throws JsonProcessingException;
 
 }
