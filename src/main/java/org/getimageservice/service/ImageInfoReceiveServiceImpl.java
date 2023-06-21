@@ -2,7 +2,6 @@ package org.getimageservice.service;
 
 import org.getimageservice.client.ImageRestTemplate;
 import org.getimageservice.model.ApiResponse;
-import org.getimageservice.utils.ExceptionParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Scope;
@@ -23,9 +22,6 @@ public class ImageInfoReceiveServiceImpl implements ImageInfoReceiveService {
     private ImageRestTemplate imageRestTemplate;
 
     @Autowired
-    private ImageInfoDtoService imageInfoDtoService;
-
-    @Autowired
     private ApiResponseService apiResponseService;
 
     @Override
@@ -44,8 +40,7 @@ public class ImageInfoReceiveServiceImpl implements ImageInfoReceiveService {
             );
             return response;
         } catch (HttpClientErrorException exception) {
-            ExceptionParser exceptionParser = new ExceptionParser();
-            ApiResponse apiResponse = exceptionParser.fromException(exception);
+            ApiResponse apiResponse = apiResponseService.fromException(exception);
             return new ResponseEntity<>(apiResponse, exception.getStatusCode());
         }
     }

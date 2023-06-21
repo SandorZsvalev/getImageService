@@ -2,7 +2,6 @@ package org.getimageservice.service;
 
 import org.getimageservice.client.ImageRestTemplate;
 import org.getimageservice.model.ApiResponse;
-import org.getimageservice.utils.ExceptionParser;
 import org.getimageservice.utils.ImageUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -24,7 +23,7 @@ public class ImageReceiveServiceImpl implements ImageReceiveService {
     private ImageRestTemplate imageRestTemplate;
 
     @Autowired
-    private ImageUtils imageUtils;
+    private ApiResponseService apiResponseService;
 
     @Override
     public ResponseEntity<ApiResponse> getImageByUuid(String imageUuid) {
@@ -40,8 +39,7 @@ public class ImageReceiveServiceImpl implements ImageReceiveService {
             );
             return response;
         } catch (HttpClientErrorException exception) {
-            ExceptionParser exceptionParser = new ExceptionParser();
-            ApiResponse apiResponse = exceptionParser.fromException(exception);
+            ApiResponse apiResponse = apiResponseService.fromException(exception);
             return new ResponseEntity<>(apiResponse, exception.getStatusCode());
         }
 

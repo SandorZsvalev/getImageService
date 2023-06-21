@@ -1,6 +1,7 @@
 package org.getimageservice.service;
 
 import org.getimageservice.model.ApiResponse;
+import org.getimageservice.model.ImageInfoDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.http.HttpStatus;
@@ -18,15 +19,20 @@ public class UserIdAndPeriodServiceImpl implements UserIdAndPeriodService {
     @Autowired
     private ImageInfoDtoService imageInfoDtoService;
 
+    @Autowired
+    ApiResponseService apiResponseService;
+
     @Override
     public ResponseEntity<?> getListOfImageByUserIdAndPeriod(Long userId, String from, String to) {
         ImageInfoReceiveService imageInfoReceiveService = context.getBean(ImageInfoReceiveService.class);
         ResponseEntity<ApiResponse> listImagesIdByUserId = imageInfoReceiveService.getListOfImageByUserIdAndPeriod(userId, from, to);
         if(listImagesIdByUserId.getStatusCode() == HttpStatus.OK){
-            List<String> uuidFromListOfImageInfoDto = imageInfoDtoService.getUUIDfromListOfImageInfoDto(listImagesIdByUserId.getBody().getList());
+            List<ImageInfoDto> imageInfoList = imageInfoDtoService.getImageInfoList(listImagesIdByUserId.getBody());
+            List<String> uuidFromListOfImageInfoDto = imageInfoDtoService.getUUIDfromListOfImageInfoDto(imageInfoList);
             return new ResponseEntity<>(uuidFromListOfImageInfoDto,listImagesIdByUserId.getStatusCode());
         } else {
-            return new ResponseEntity<>(listImagesIdByUserId.getBody().getError(),listImagesIdByUserId.getStatusCode());
+            String errorMessage = apiResponseService.getErrorMessage(listImagesIdByUserId.getBody());
+            return new ResponseEntity<>(errorMessage,listImagesIdByUserId.getStatusCode());
         }
     }
 }
