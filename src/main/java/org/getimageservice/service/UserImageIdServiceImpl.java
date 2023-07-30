@@ -18,7 +18,7 @@ public class UserImageIdServiceImpl implements UserImageIdService {
     private ImageDtoService imageDtoService;
 
     @Autowired
-    ApiResponseService apiResponseService;
+    private ApiResponseService apiResponseService;
 
     @Override
     public ResponseEntity<?> getImageByUuid(String imageUuid) {

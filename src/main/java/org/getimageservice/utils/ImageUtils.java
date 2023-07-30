@@ -1,14 +1,11 @@
 package org.getimageservice.utils;
 
-import org.springframework.stereotype.Component;
-
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 
-@Component
 public class ImageUtils {
     public static BufferedImage bytesToImage(byte[] imageData) throws IOException {
         ByteArrayInputStream bis = new ByteArrayInputStream(imageData);
