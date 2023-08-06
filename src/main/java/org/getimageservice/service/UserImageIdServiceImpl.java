@@ -1,7 +1,9 @@
 package org.getimageservice.service;
 
 import org.getimageservice.model.ApiResponse;
-import org.getimageservice.model.ImageDto;
+import org.getimageservice.model.Image;
+import org.getimageservice.model.ImageResponse;
+import org.getimageservice.service.mapper.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.http.HttpStatus;
@@ -12,10 +14,13 @@ import org.springframework.stereotype.Service;
 public class UserImageIdServiceImpl implements UserImageIdService {
 
     @Autowired
+    private Mapper<ImageResponse, Image> mapper;
+
+    @Autowired
     private ApplicationContext context;
 
     @Autowired
-    private ImageDtoService imageDtoService;
+    private ImageService imageService;
 
     @Autowired
     private ApiResponseService apiResponseService;
@@ -24,13 +29,13 @@ public class UserImageIdServiceImpl implements UserImageIdService {
     public ResponseEntity<?> getImageByUuid(String imageUuid) {
         ImageReceiveService imageReceiveService = context.getBean(ImageReceiveService.class);
         ResponseEntity<ApiResponse> imageByUuid = imageReceiveService.getImageByUuid(imageUuid);
-        if (imageByUuid.getStatusCode() == HttpStatus.OK){
-            ImageDto imageDto = imageDtoService.getImageDto(imageByUuid.getBody());
-            byte[] imageFromImageDto = imageDtoService.getImageFromImageDto(imageDto);
-            return new ResponseEntity<>(imageFromImageDto,imageByUuid.getStatusCode());
+        if (imageByUuid.getStatusCode() == HttpStatus.OK) {
+            Image image = imageService.getImage(imageByUuid.getBody());
+            ImageResponse imageResponse = mapper.toDo(image);
+            return new ResponseEntity<>(imageResponse, imageByUuid.getStatusCode());
         } else {
             String errorMessage = apiResponseService.getErrorMessage(imageByUuid.getBody());
-            return new ResponseEntity<>(errorMessage,imageByUuid.getStatusCode());
+            return new ResponseEntity<>(errorMessage, imageByUuid.getStatusCode());
         }
     }
 }

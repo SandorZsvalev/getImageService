@@ -1,23 +1,25 @@
 package org.getimageservice.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.getimageservice.service.ModelMicroService;
+
 import java.util.Date;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class ImageInfoDto {
+public class ImageInfo implements ModelMicroService {
     private String uuid;
 
     private Date creationDate;
 
     private Long size;
 
-    public ImageInfoDto(String uuid, Date creationDate, Long size) {
+    public ImageInfo(String uuid, Date creationDate, Long size) {
         this.uuid = uuid;
         this.creationDate = creationDate;
         this.size = size;
     }
 
-    public ImageInfoDto() {
+    public ImageInfo() {
         //
     }
 

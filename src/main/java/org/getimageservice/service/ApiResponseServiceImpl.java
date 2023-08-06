@@ -12,7 +12,7 @@ import java.util.Map;
 @Service
 public class ApiResponseServiceImpl implements ApiResponseService {
 
-    public ApiResponse fromException (HttpClientErrorException exception){
+    public ApiResponse fromException(HttpClientErrorException exception) {
         ApiResponse apiResponse = new ApiResponse();
         String exceptionMessage = exception.getMessage();
 
@@ -39,7 +39,7 @@ public class ApiResponseServiceImpl implements ApiResponseService {
         return apiResponse;
     }
 
-    public String getErrorMessage (ApiResponse apiResponse){
+    public String getErrorMessage(ApiResponse apiResponse) {
         return apiResponse.getError();
     }
 }

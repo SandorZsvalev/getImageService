@@ -8,8 +8,8 @@ import java.util.List;
 public class ApiResponse {
 
     private String error;
-    private List<ImageInfoDto> list;
-    private ImageDto t;
+    private List<ImageInfo> list;
+    private Image t;
 
     public ApiResponse() {
     //
@@ -23,19 +23,19 @@ public class ApiResponse {
         this.error = error;
     }
 
-    public List<ImageInfoDto> getList() {
+    public List<ImageInfo> getList() {
         return list;
     }
 
-    public void setList(List<ImageInfoDto> list) {
+    public void setList(List<ImageInfo> list) {
         this.list = list;
     }
 
-    public ImageDto getT() {
+    public Image getT() {
         return t;
     }
 
-    public void setT(ImageDto t) {
+    public void setT(Image t) {
         this.t = t;
     }
 }

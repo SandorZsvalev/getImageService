@@ -6,7 +6,7 @@ import org.springframework.web.client.HttpClientErrorException;
 
 public interface ApiResponseService {
 
-    ApiResponse fromException (HttpClientErrorException exception);
+    ApiResponse fromException(HttpClientErrorException exception);
 
-    String getErrorMessage (ApiResponse apiResponse);
+    String getErrorMessage(ApiResponse apiResponse);
 }
